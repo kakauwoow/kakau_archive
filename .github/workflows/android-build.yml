@@ -9,8 +9,15 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout latest main
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Show commit and theme source
+        run: |
+          git rev-parse HEAD
+          sed -n '1,40p' app/src/main/java/com/kakau/archive/ui/theme/KakauTheme.kt
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
